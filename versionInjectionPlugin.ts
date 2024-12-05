@@ -16,7 +16,6 @@ const versionInjectionPlugin: () => FederationRuntimePlugin = function () {
         beforeRequest(args) {
             const version = window.remotes.appearancePage
             args.options.remotes = (args.options.remotes as RemoteWithEntry[]).map((remote) => {
-                console.log({remote})
                 const templatePath = remote.entry;
                 if (!templatePath) {
                     return remote;

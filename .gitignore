@@ -12,3 +12,8 @@ dist/
 !.vscode/extensions.json
 .idea
 /@mf-types/
+
+# OTHER
+.env
+.env.*
+!.env.example
