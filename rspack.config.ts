@@ -2,6 +2,7 @@ import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
 import * as RefreshPlugin from '@rspack/plugin-react-refresh';
+import { resolve } from "node:path";
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -55,8 +56,10 @@ export default defineConfig({
     new ModuleFederationPlugin({
       name: 'HostApp',
       remotes: {
-        mfS3Poc: `MfS3Poc@https://portal-less-manual.us.dev.nexthink.cloud/static/ui/appearance-page/2024-10-31-12-08.PR-184-450c371/mf-manifest.json`,
+        mfS3Poc: `MfS3Poc@https://portal-less-manual.us.dev.nexthink.cloud/static/ui/appearance-page/$VERSION/mf-manifest.json`,
+        // mfS3Poc: `MfS3Poc@https://portal-less-manual.us.dev.nexthink.cloud/static/ui/appearance-page/2024-10-31-12-08.PR-184-450c371/mf-manifest.json`,
       },
+      runtimePlugins: [resolve(__dirname, './versionInjectionPlugin.ts')],
     }),
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
